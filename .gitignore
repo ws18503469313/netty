@@ -1,0 +1,38 @@
+target/
+bin/
+
+### STS ###
+smartstoragev3/src/main/resources/application.properties
+smartstoragev3/out/
+*.properties
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.metadata
+.externalToolBuilders
+
+*.class
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
