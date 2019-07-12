@@ -47,7 +47,9 @@ repositories {
 dependencies {
 
     compile  (
-         "io.netty:netty-all:4.1.25.Final"
+            "io.netty:netty-all:4.1.25.Final",
+            "com.google.protobuf:protobuf-java:3.8.0"
+
     )
 
 }

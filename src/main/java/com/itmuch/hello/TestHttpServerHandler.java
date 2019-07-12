@@ -19,7 +19,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
         if(msg instanceof  HttpRequest){
             HttpRequest request = (HttpRequest)msg;
-            System.out.println("请求方法名:"+request.getMethod().name());
+            System.out.println("请求方法名:"+request.method().name());
 
             URI uri = new URI(request.uri());
 
