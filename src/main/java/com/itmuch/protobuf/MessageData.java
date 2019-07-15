@@ -1382,11 +1382,11 @@ public final class MessageData {
         getNameBytes();
 
     /**
-     * <code>optional int32 age = 23;</code>
+     * <code>optional int32 age = 2;</code>
      */
     boolean hasAge();
     /**
-     * <code>optional int32 age = 23;</code>
+     * <code>optional int32 age = 2;</code>
      */
     int getAge();
 
@@ -1458,15 +1458,15 @@ public final class MessageData {
               name_ = bs;
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              age_ = input.readInt32();
+              break;
+            }
             case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
               address_ = bs;
-              break;
-            }
-            case 184: {
-              bitField0_ |= 0x00000002;
-              age_ = input.readInt32();
               break;
             }
             default: {
@@ -1544,16 +1544,16 @@ public final class MessageData {
       }
     }
 
-    public static final int AGE_FIELD_NUMBER = 23;
+    public static final int AGE_FIELD_NUMBER = 2;
     private int age_;
     /**
-     * <code>optional int32 age = 23;</code>
+     * <code>optional int32 age = 2;</code>
      */
     public boolean hasAge() {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>optional int32 age = 23;</code>
+     * <code>optional int32 age = 2;</code>
      */
     public int getAge() {
       return age_;
@@ -1618,11 +1618,11 @@ public final class MessageData {
       if (((bitField0_ & 0x00000001) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        output.writeInt32(2, age_);
+      }
       if (((bitField0_ & 0x00000004) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, address_);
-      }
-      if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeInt32(23, age_);
       }
       unknownFields.writeTo(output);
     }
@@ -1636,12 +1636,12 @@ public final class MessageData {
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
       }
-      if (((bitField0_ & 0x00000004) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, address_);
-      }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(23, age_);
+          .computeInt32Size(2, age_);
+      }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, address_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2045,19 +2045,19 @@ public final class MessageData {
 
       private int age_ ;
       /**
-       * <code>optional int32 age = 23;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public boolean hasAge() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>optional int32 age = 23;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public int getAge() {
         return age_;
       }
       /**
-       * <code>optional int32 age = 23;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public Builder setAge(int value) {
         bitField0_ |= 0x00000002;
@@ -2066,7 +2066,7 @@ public final class MessageData {
         return this;
       }
       /**
-       * <code>optional int32 age = 23;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public Builder clearAge() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2222,11 +2222,11 @@ public final class MessageData {
         getNameBytes();
 
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     boolean hasAge();
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     int getAge();
   }
@@ -2283,7 +2283,7 @@ public final class MessageData {
               name_ = bs;
               break;
             }
-            case 24: {
+            case 16: {
               bitField0_ |= 0x00000002;
               age_ = input.readInt32();
               break;
@@ -2363,16 +2363,16 @@ public final class MessageData {
       }
     }
 
-    public static final int AGE_FIELD_NUMBER = 3;
+    public static final int AGE_FIELD_NUMBER = 2;
     private int age_;
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     public boolean hasAge() {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     public int getAge() {
       return age_;
@@ -2396,7 +2396,7 @@ public final class MessageData {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
       if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeInt32(3, age_);
+        output.writeInt32(2, age_);
       }
       unknownFields.writeTo(output);
     }
@@ -2412,7 +2412,7 @@ public final class MessageData {
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, age_);
+          .computeInt32Size(2, age_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2796,19 +2796,19 @@ public final class MessageData {
 
       private int age_ ;
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public boolean hasAge() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public int getAge() {
         return age_;
       }
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public Builder setAge(int value) {
         bitField0_ |= 0x00000002;
@@ -2817,7 +2817,7 @@ public final class MessageData {
         return this;
       }
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public Builder clearAge() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2897,11 +2897,11 @@ public final class MessageData {
         getNameBytes();
 
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     boolean hasAge();
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     int getAge();
   }
@@ -2958,7 +2958,7 @@ public final class MessageData {
               name_ = bs;
               break;
             }
-            case 24: {
+            case 16: {
               bitField0_ |= 0x00000002;
               age_ = input.readInt32();
               break;
@@ -3038,16 +3038,16 @@ public final class MessageData {
       }
     }
 
-    public static final int AGE_FIELD_NUMBER = 3;
+    public static final int AGE_FIELD_NUMBER = 2;
     private int age_;
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     public boolean hasAge() {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>optional int32 age = 3;</code>
+     * <code>optional int32 age = 2;</code>
      */
     public int getAge() {
       return age_;
@@ -3071,7 +3071,7 @@ public final class MessageData {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
       if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeInt32(3, age_);
+        output.writeInt32(2, age_);
       }
       unknownFields.writeTo(output);
     }
@@ -3087,7 +3087,7 @@ public final class MessageData {
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, age_);
+          .computeInt32Size(2, age_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3471,19 +3471,19 @@ public final class MessageData {
 
       private int age_ ;
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public boolean hasAge() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public int getAge() {
         return age_;
       }
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public Builder setAge(int value) {
         bitField0_ |= 0x00000002;
@@ -3492,7 +3492,7 @@ public final class MessageData {
         return this;
       }
       /**
-       * <code>optional int32 age = 3;</code>
+       * <code>optional int32 age = 2;</code>
        */
       public Builder clearAge() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -3591,9 +3591,9 @@ public final class MessageData {
       "\004 \001(\0132\030.com.itmuch.protobuf.CatH\000\"4\n\010Dat" +
       "eType\022\016\n\nPersonType\020\001\022\013\n\007DogType\020\002\022\013\n\007Ca" +
       "tType\020\003B\n\n\010dataBody\"4\n\006Person\022\014\n\004name\030\001 " +
-      "\001(\t\022\013\n\003age\030\027 \001(\005\022\017\n\007address\030\003 \001(\t\" \n\003Dog" +
-      "\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\003 \001(\005\" \n\003Cat\022\014\n\004na" +
-      "me\030\001 \001(\t\022\013\n\003age\030\003 \001(\005B$\n\023com.itmuch.prot" +
+      "\001(\t\022\013\n\003age\030\002 \001(\005\022\017\n\007address\030\003 \001(\t\" \n\003Dog" +
+      "\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\" \n\003Cat\022\014\n\004na" +
+      "me\030\001 \001(\t\022\013\n\003age\030\002 \001(\005B$\n\023com.itmuch.prot" +
       "obufB\013MessageDataH\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

@@ -1,16 +1,15 @@
 package com.itmuch.protobuf.nettyTest;
 
-import com.itmuch.protobuf.DateInfo;
 import com.itmuch.protobuf.MessageData;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.Random;
 
-public class ProtobufClientHandler extends SimpleChannelInboundHandler<DateInfo.Student> {
+public class ProtobufClientHandler extends SimpleChannelInboundHandler<MessageData.Content> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, DateInfo.Student msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MessageData.Content msg) throws Exception {
 
     }
 
@@ -35,6 +34,7 @@ public class ProtobufClientHandler extends SimpleChannelInboundHandler<DateInfo.
             content = MessageData.Content.newBuilder().setDateType(MessageData.Content.DateType.CatType)
                     .setCat(MessageData.Cat.newBuilder().setName("xiaomao").setAge(2).build()).build();
         }
+        System.out.println(content.toString());
         ctx.channel().writeAndFlush(content);
     }
 }
