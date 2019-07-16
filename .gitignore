@@ -2,8 +2,6 @@ target/
 bin/
 
 ### STS ###
-smartstoragev3/src/main/resources/application.properties
-smartstoragev3/out/
 *.properties
 .apt_generated
 .classpath

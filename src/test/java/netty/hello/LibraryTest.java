@@ -4,5 +4,15 @@
 package netty.hello;
 
 public class LibraryTest {
-	
+
+	public static void main(String args[]){
+	    System.out.println(1);
+	    Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run() {
+                System.out.println("系统即将退出");
+            }
+        });
+	    System.out.println(2);
+	}
 }
