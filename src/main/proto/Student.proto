@@ -9,6 +9,12 @@ option java_multiple_files = true;
 
 service StudentService{
     rpc getRealNameByUsername(MyRequest) returns (MyResponse){}
+    //流式的数据用stram表示,java用Iterator来实现
+    rpc getStudentsByAge(StudentRequest) returns(stream StudentResponse){}
+
+    rpc getStudentsWapperByAge(stream StudentRequest) returns(StudentResponseList){}
+
+    rpc BiTalk(stream StreamRequset) returns (stream StreamResponse){}
 }
 
 message MyRequest{
@@ -20,3 +26,21 @@ message MyResponse{
     string realname = 1;
 }
 
+message StudentRequest{
+    int32 age = 1;
+}
+message StudentResponse{
+    string name = 1;
+    int32 age = 2;
+    string city = 3;
+}
+
+message StudentResponseList{
+    repeated StudentResponse studentResponse = 1;
+}
+message StreamRequset{
+    string requestinfo = 1;
+}
+message StreamResponse{
+    string responseinfo = 1;
+}
