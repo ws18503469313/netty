@@ -37,13 +37,15 @@ dependencies {
         "io.grpc:grpc-protobuf-lite:1.22.1",
         "io.grpc:grpc-stub:1.22.1",
         "io.grpc:grpc-protobuf:1.22.1",
-        "io.grpc:grpc-netty:1.22.1"
+        "io.grpc:grpc-netty:1.22.1",
+        "com.alibaba:fastjson:1.1.28"
 
 
     )
 
 }
 protobuf {
+    generatedFilesBaseDir = "src"
     protoc {
         artifact = "com.google.protobuf:protoc:3.7.1"
     }
@@ -54,7 +56,9 @@ protobuf {
     }
     generateProtoTasks {
         all()*.plugins {
-            grpc {}
+            grpc {
+                outputSubDir = 'java'
+            }
         }
     }
 }

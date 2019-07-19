@@ -10,7 +10,7 @@ public interface StreamRequsetOrBuilder extends
   /**
    * <code>string requestinfo = 1;</code>
    */
-  String getRequestinfo();
+  java.lang.String getRequestinfo();
   /**
    * <code>string requestinfo = 1;</code>
    */
