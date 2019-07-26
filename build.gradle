@@ -62,3 +62,9 @@ protobuf {
         }
     }
 }
+/**
+ * 使用utf-8模式编译
+ */
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

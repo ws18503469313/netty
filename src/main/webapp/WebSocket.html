@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>client</title>
+</head>
+<body>
+    <script>
+        var socket;
+        if(window.WebSocket){
+            socket = new WebSocket("ws://localhost:8899/wx");
+            socket.onmessage = function (event) {
+                var ta = document.getElementById("responseText");
+                ta.value = ta.value + "\n" + event.data;
+            }
+
+            socket.onopen = function (event) {
+                var ta = document.getElementById("resoponeText");
+                ta.value = "连接建立"
+            }
+
+            socket.onclose = function (event) {
+                var ta = document.getElementById("responseText");
+                ta.value = ta.value + "\n连接断开" ;
+            }
+        }
+        function  send(msg) {
+            if(!window.WebSocket){
+                return ;
+            }
+            if(socket.readyState == WebSocket.OPEN){
+                socket.send(msg);
+            }else{
+                alert("连接未开启")
+            }
+        }
+    </script>
+</body>
+</html>
