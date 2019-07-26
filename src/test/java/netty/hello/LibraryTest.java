@@ -6,14 +6,18 @@ package netty.hello;
 public class LibraryTest {
 
 
+//    public static void main(String args[]) throws Exception{
+//        System.out.println(1);
+//        Runtime.getRuntime().addShutdownHook(new Thread(){
+//            @Override
+//            public void run() {
+//                System.out.println("系统即将退出");
+//            }
+//        });
+//        System.out.println(2);
+//    }
+
     public static void main(String args[]) throws Exception{
-        System.out.println(1);
-        Runtime.getRuntime().addShutdownHook(new Thread(){
-            @Override
-            public void run() {
-                System.out.println("系统即将退出");
-            }
-        });
-        System.out.println(2);
+        System.out.println(0x5f3759df);
     }
 }

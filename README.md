@@ -70,3 +70,58 @@
           从读到写======>limit位置不变,position归零
           
         buffer.clear()只是操作三个指针,buffer中的数据并不变.
+        
+        buffer.slice(); 返回的是原buffer的引用,操作的还是同一个buffer
+        
+        buffer.asReadOnlyBuffer(); 无法转回成可写的
+        
+        
+    **DirectByteBuffer--ZERO_COPY**
+
+      heapBytebuffer 会拷贝数据到jvm内存中
+        
+      java-jvm直接操纵的堆内存
+      
+      -------------------------------------
+      
+      系统本地的内存空间,native --malloc (*)  通过<p>long address;</p>来声明操作对外内存--操作系统内存.
+      
+      buffer的 scattering 与 gathering
+      
+      buffer数组
+      
+             
+**Charset**
+
+    ASCII (American standard code for infomation interchange)
+        7位,128种
+    iso-8859-1
+        8位 8 bit (1 byte) 表示一个字符  256种
+    gb2312
+        对所有汉字进行编码,两个一个汉字==2byte
+    GBK 对gb2312 进行扩展
+    
+    GB18030 对gbk进行扩展
+    
+    big5--台湾
+    
+    unicode--所有字符.两个byte表示一个字符 2^8 * 2^8,存储容量变大
+        是一种编码格式
+    utf-8
+        unicode translation format 
+        是一种存储方式是unicode的一种实现方式
+        变长的字节表示形式
+        用三个byte表示一个字符
+        BOM(Byte Order Mark), 字节序标记,window存在
+    utf-16 
+        le little ending
+        be  big ending
+        大小端.
+        
+    
+    
+**Netty**
+
+      
+     
+      

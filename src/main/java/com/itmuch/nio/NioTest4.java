@@ -24,6 +24,7 @@ public class NioTest4 {
            if(-1 == read){
                break;
            }
+           buffer.putInt(2);
            buffer.flip();
            outChannel.write(buffer);
            buffer.flip();
