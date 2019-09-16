@@ -11,7 +11,7 @@ public class NioTest2 {
         FileInputStream in = new FileInputStream(new File("niotest.txt"));
         FileChannel channel = in.getChannel();
 
-        ByteBuffer buffer = ByteBuffer.allocate(512);
+        ByteBuffer buffer = ByteBuffer.allocate(in.available());
         channel.read(buffer);
 
         buffer.flip();

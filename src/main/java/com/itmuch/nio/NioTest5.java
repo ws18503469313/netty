@@ -23,7 +23,7 @@ public class NioTest5 {
     }
 
 
-    public static void main2(String args[]) throws Exception{
+    public static void main(String args[]) throws Exception{
         ByteBuffer buffer = ByteBuffer.allocate(10);
         for (int i = 0; i < buffer.capacity(); i++){
             buffer.put((byte)i);
@@ -47,7 +47,7 @@ public class NioTest5 {
         }
     }
 
-    public static void main(String args[]) throws Exception{
+    public static void main3(String args[]) throws Exception{
         ByteBuffer buffer = ByteBuffer.allocate(10);
         System.out.println(buffer.getClass());
         for (int i = 0; i < buffer.capacity(); i++){

@@ -48,6 +48,7 @@ public class NioTest8 {
             Arrays.asList(buffers).forEach( b ->{
                 b.clear();
             });
+
             System.out.println("byteRead:"+ byteRead + ",bytewritten:"+byteWritten + ",messagelength:"+messageLength);
         }
 

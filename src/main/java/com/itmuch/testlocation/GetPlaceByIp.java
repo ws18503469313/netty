@@ -42,6 +42,6 @@ public class GetPlaceByIp {
         //这里调用百度的ip定位api服务 详见 http://api.map.baidu.com/lbsapi/cloud/ip-location-api.htm
         JSONObject json = readJsonFromUrl("http://api.map.baidu.com/location/ip?ak=F454f8a5efe5e577997931cc01de3974&ip=183.202.213.131");
         System.out.println(json.toString());
-        System.out.println(((JSONObject) json.get("content")).get("address"));
+        System.out.println();
     }
 }

@@ -35,6 +35,7 @@ public class Server {
         Charset charset = Charset.forName("UTF-8");
         //网络程序都是死循环,都不会退出
         while (true){
+            System.out.println("work dead loop  ");
             try{
                 //返回事件关注的数量
                 int num = selector.select();
