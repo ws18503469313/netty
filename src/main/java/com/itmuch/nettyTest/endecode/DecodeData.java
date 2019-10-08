@@ -29,7 +29,7 @@ public class DecodeData {
         //开始校验包头
         while(true){
             byte[] head = new byte[PackageInfo.PACKAGE_HEAD_LENGTH];
-            position = DecodeUtils.arraycopy0(data, position, head, 0, PackageInfo.PACKAGE_HEAD_LENGTH);
+            position = TcpSocketUtils.arraycopy0(data, position, head, 0, PackageInfo.PACKAGE_HEAD_LENGTH);
             position += PackageInfo.PACKAGE_HEAD_LENGTH;
             if (Arrays.equals(head, PackageHead())) {
                 log.info("======================包头校验成功========================");
@@ -42,24 +42,24 @@ public class DecodeData {
         //例如：生产号为32的网关，其SN号为0x00000020）
         int SNSign = data[position++];
         byte[] serialIdBytes = new byte[3];
-        position = DecodeUtils.arraycopy0(data, position, serialIdBytes, 0, 3);
+        position = TcpSocketUtils.arraycopy0(data, position, serialIdBytes, 0, 3);
         Integer serialId = Integer.valueOf(new BigInteger(serialIdBytes).toString(10));
 
         //获取数据长度
         byte [] dateLenBytes = new byte[2];
-        position = DecodeUtils.arraycopy0(data, position, dateLenBytes, 0, PackageInfo.DATA_LENGTH);
-        int dataLen = DecodeUtils.bytesToShort(dateLenBytes)[0];
+        position = TcpSocketUtils.arraycopy0(data, position, dateLenBytes, 0, PackageInfo.DATA_LENGTH);
+        int dataLen = TcpSocketUtils.bytesToShort(dateLenBytes)[0];
 
         //校验crc
         byte [] crcBytes = new byte[2];
-        position = DecodeUtils.arraycopy0(data, position, crcBytes, 0, PackageInfo.CRC_LENGTH);
-        int crc = DecodeUtils.bytesToShort(dateLenBytes)[0];
+        position = TcpSocketUtils.arraycopy0(data, position, crcBytes, 0, PackageInfo.CRC_LENGTH);
+        int crc = TcpSocketUtils.bytesToShort(dateLenBytes)[0];
         //发送过来的数据类型
         int type = data[position++];
         //发送过来的业务数据
         byte [] dataBytes = new byte[dataLen];
-        position = DecodeUtils.arraycopy0(data, position, dataBytes, 0, dataLen);
-        int caculateCRC = DecodeUtils.crc(dataBytes, 0);
+        position = TcpSocketUtils.arraycopy0(data, position, dataBytes, 0, dataLen);
+        int caculateCRC = TcpSocketUtils.crc(dataBytes, 0);
 
         if(crc != caculateCRC){
             log.info("校验完成,解析到的CRC:{},计算出的CRC:{}, 校验失败", crc, caculateCRC);
@@ -151,19 +151,19 @@ public class DecodeData {
 //            if (data.length >= position + 19) {
                 //主板SN号
             byte[] mainBordSN = new byte[4];
-            position = DecodeUtils.arraycopy0(data, position, mainBordSN, 0, mainBordSN.length);
+            position = TcpSocketUtils.arraycopy0(data, position, mainBordSN, 0, mainBordSN.length);
             //总重
             byte[] weight = new byte[4];
-            position = DecodeUtils.arraycopy0(data, position, weight, 0, weight.length);
+            position = TcpSocketUtils.arraycopy0(data, position, weight, 0, weight.length);
             //单重
             byte[] singleWeight = new byte[4];
-            position = DecodeUtils.arraycopy0(data, position , singleWeight, 0, singleWeight.length);
+            position = TcpSocketUtils.arraycopy0(data, position , singleWeight, 0, singleWeight.length);
             //最大业务量程
             byte[] maxWeightRange = new byte[4];
-            position = DecodeUtils.arraycopy0(data, position , maxWeightRange, 0, maxWeightRange.length);
+            position = TcpSocketUtils.arraycopy0(data, position , maxWeightRange, 0, maxWeightRange.length);
             //数量
             byte[] num = new byte[2];
-            position = DecodeUtils.arraycopy0(data, position , num, 0, num.length);
+            position = TcpSocketUtils.arraycopy0(data, position , num, 0, num.length);
             //状态
             int state = data[position++];
 
@@ -197,14 +197,14 @@ public class DecodeData {
         version.append(data[3]);
         int position = 0;
         byte [] versionBytes = new byte[4];
-        position = DecodeUtils.arraycopy0(data, 0, versionBytes, 0, PackageInfo.PACKAGE_VERSION_LENGTH);
+        position = TcpSocketUtils.arraycopy0(data, 0, versionBytes, 0, PackageInfo.PACKAGE_VERSION_LENGTH);
         //获取的数据位置
         byte [] dataPositionBytes = new byte[4];
-        position = DecodeUtils.arraycopy0(data, position, dataPositionBytes, 0, dataPositionBytes.length);
+        position = TcpSocketUtils.arraycopy0(data, position, dataPositionBytes, 0, dataPositionBytes.length);
         int dataPosition = Integer.valueOf(TcpSocketUtils.binary(dataPositionBytes, 10));
         //申请的长度
         byte [] applyLenBytes = new byte[2];
-        position = DecodeUtils.arraycopy0(data, position, applyLenBytes, 0, applyLenBytes.length);
+        position = TcpSocketUtils.arraycopy0(data, position, applyLenBytes, 0, applyLenBytes.length);
         int applyLen = Integer.valueOf(TcpSocketUtils.binary(applyLenBytes, 10));
 
         int applyPackageNum = data[position];

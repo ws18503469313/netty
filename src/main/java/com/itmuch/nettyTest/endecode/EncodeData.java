@@ -35,7 +35,7 @@ public class EncodeData {
         //包头
         byte[] packageHead = TcpSocketUtils.toByteArray(0x1acf, PackageInfo.PACKAGE_HEAD_LENGTH);
         //网关id
-        byte[] serrialIDBytes = DecodeUtils.getSNByte(downStream.getSerrialID(), SNType.ZUUL);
+        byte[] serrialIDBytes = TcpSocketUtils.getSNByte(downStream.getSerrialID(), SNType.ZUUL);
         serrialIDBytes[0] = 0;
         //data长度
         int len = 0;
@@ -47,26 +47,26 @@ public class EncodeData {
                 len = PackageInfo.BASIC_PACKAGE_LENGTH + 1;
                 data = new byte[len];
                 //包头
-                position = DecodeUtils.arraycopy(packageHead, 0, data, position, PackageInfo.PACKAGE_HEAD_LENGTH);
+                position = TcpSocketUtils.arraycopy(packageHead, 0, data, position, PackageInfo.PACKAGE_HEAD_LENGTH);
                 //主板SN号SSNID
 //                byte [] mainBoardSNbytes = TcpSocketUtils.toByteArray(downStream.getMainBoardSN(), PackageInfo.SN_LENGTH);
-                byte [] mainBoardSNbytes = DecodeUtils.getSNByte(downStream.getMainBoardSN(), SNType.MAIN_BOARD);
-                position = DecodeUtils.arraycopy(mainBoardSNbytes, 0, data, position, PackageInfo.SN_LENGTH);
+                byte [] mainBoardSNbytes = TcpSocketUtils.getSNByte(downStream.getMainBoardSN(), SNType.MAIN_BOARD);
+                position = TcpSocketUtils.arraycopy(mainBoardSNbytes, 0, data, position, PackageInfo.SN_LENGTH);
                 //SDATA 的长度 SLEN
                 byte [] lenBytes = TcpSocketUtils.toByteArray(1, PackageInfo.DATA_LENGTH);
-                position = DecodeUtils.arraycopy(lenBytes, 0, data, position, PackageInfo.DATA_LENGTH);
+                position = TcpSocketUtils.arraycopy(lenBytes, 0, data, position, PackageInfo.DATA_LENGTH);
                 //数据SDATA
                 byte [] sdata = TcpSocketUtils.toByteArray(downStream.getSetMainboardState().getValue(), PackageInfo.SET_MAIN_BOARD_STATE_LENGTH);
 
                 //SCRC
-                int crc = DecodeUtils.crc(sdata,0);
+                int crc = TcpSocketUtils.crc(sdata,0);
                 byte [] scrc = TcpSocketUtils.toByteArray(crc, PackageInfo.CRC_LENGTH);
-                position = DecodeUtils.arraycopy(scrc, 0, data, position, PackageInfo.CRC_LENGTH);
+                position = TcpSocketUtils.arraycopy(scrc, 0, data, position, PackageInfo.CRC_LENGTH);
                 //STYPE
                 byte [] stype = TcpSocketUtils.toByteArray(downStream.getSetMainboardState().getValue(), PackageInfo.TYPE_LENGTH);
-                position = DecodeUtils.arraycopy(stype, 0, data, position, PackageInfo.TYPE_LENGTH);
+                position = TcpSocketUtils.arraycopy(stype, 0, data, position, PackageInfo.TYPE_LENGTH);
                 //最后设置数据sdata
-                position = DecodeUtils.arraycopy(sdata, 0, data, position, PackageInfo.SET_MAIN_BOARD_STATE_LENGTH);
+                position = TcpSocketUtils.arraycopy(sdata, 0, data, position, PackageInfo.SET_MAIN_BOARD_STATE_LENGTH);
                 break;
             case ACTIVE_APPLY:
                 len = 1;
@@ -101,7 +101,7 @@ public class EncodeData {
                 //主板SN号
                 for(Integer sn: downStream.getSetMainBoardSN()){
 //                    byte [] mainBoardSNBytes = TcpSocketUtils.toByteArray(sn, PackageInfo.SN_LENGTH);
-                    byte [] mainBoardSNBytes = DecodeUtils.getSNByte(sn, SNType.MAIN_BOARD);
+                    byte [] mainBoardSNBytes = TcpSocketUtils.getSNByte(sn, SNType.MAIN_BOARD);
                     mainBoardSNBytes[0] = 1;
                     System.arraycopy(mainBoardSNBytes, 0, data, position, PackageInfo.SN_LENGTH);
                     position += PackageInfo.SN_LENGTH;
@@ -120,7 +120,7 @@ public class EncodeData {
         //表示数据区长度的byte
         byte [] lenBytes = TcpSocketUtils.toByteArray(len, PackageInfo.DATA_LENGTH);
         //CRC
-        int crc = DecodeUtils.crc(data, 0);
+        int crc = TcpSocketUtils.crc(data, 0);
         byte [] CRCBytes = TcpSocketUtils.toByteArray(crc, 2);
         //type
         byte [] typeBytes = TcpSocketUtils.toByteArray(downStream.getDownStreamType().getValue(), 1);
@@ -128,12 +128,12 @@ public class EncodeData {
         byte [] packageBytes = new byte[PackageInfo.BASIC_PACKAGE_LENGTH + data.length];
         //数据包指针
         int packagePosition  = 0;
-        packagePosition = DecodeUtils.arraycopy(packageHead, 0, packageBytes, packagePosition, PackageInfo.PACKAGE_HEAD_LENGTH);
-        packagePosition = DecodeUtils.arraycopy(serrialIDBytes, 0, packageBytes, packagePosition, PackageInfo.SN_LENGTH);
-        packagePosition = DecodeUtils.arraycopy(lenBytes, 0, packageBytes, packagePosition, PackageInfo.DATA_LENGTH);
-        packagePosition = DecodeUtils.arraycopy(CRCBytes, 0, packageBytes, packagePosition, PackageInfo.CRC_LENGTH);
-        packagePosition = DecodeUtils.arraycopy(typeBytes, 0, packageBytes, packagePosition, PackageInfo.TYPE_LENGTH);
-        DecodeUtils.arraycopy(data, 0, packageBytes, packagePosition, data.length);
+        packagePosition = TcpSocketUtils.arraycopy(packageHead, 0, packageBytes, packagePosition, PackageInfo.PACKAGE_HEAD_LENGTH);
+        packagePosition = TcpSocketUtils.arraycopy(serrialIDBytes, 0, packageBytes, packagePosition, PackageInfo.SN_LENGTH);
+        packagePosition = TcpSocketUtils.arraycopy(lenBytes, 0, packageBytes, packagePosition, PackageInfo.DATA_LENGTH);
+        packagePosition = TcpSocketUtils.arraycopy(CRCBytes, 0, packageBytes, packagePosition, PackageInfo.CRC_LENGTH);
+        packagePosition = TcpSocketUtils.arraycopy(typeBytes, 0, packageBytes, packagePosition, PackageInfo.TYPE_LENGTH);
+        TcpSocketUtils.arraycopy(data, 0, packageBytes, packagePosition, data.length);
         return packageBytes;
     }
 
@@ -160,13 +160,13 @@ public class EncodeData {
         int position = 0;
         //包头
         byte [] headbytes = TcpSocketUtils.toByteArray(0X3AFD, PackageInfo.PACKAGE_HEAD_LENGTH);
-        position = DecodeUtils.arraycopy(headbytes, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
+        position = TcpSocketUtils.arraycopy(headbytes, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
         //版本号
-        position = DecodeUtils.arraycopy(downStream.getVersionBytes(), 0, result, position, PackageInfo.PACKAGE_VERSION_LENGTH);
+        position = TcpSocketUtils.arraycopy(downStream.getVersionBytes(), 0, result, position, PackageInfo.PACKAGE_VERSION_LENGTH);
         //数据区长度的bytes
         byte [] lenBytes = TcpSocketUtils.toByteArray(downStream.getApplyLen(), 4);
         //f分包内容长度为4
-        position = DecodeUtils.arraycopy(lenBytes, 0, result, position, 4);
+        position = TcpSocketUtils.arraycopy(lenBytes, 0, result, position, 4);
         //NIO方式
         RandomAccessFile file = new RandomAccessFile(PackageInfo.packagePATH + downStream.getPackageName(), "r");
         FileChannel channel = file.getChannel();
@@ -175,13 +175,13 @@ public class EncodeData {
         if(log.isInfoEnabled())
             log.info("==========分包发送的具体数据: {}", dataBytes);
         //CRC
-        byte [] CRCBytes = TcpSocketUtils.toByteArray(DecodeUtils.crc(dataBytes,0), PackageInfo.CRC_LENGTH);
-        position = DecodeUtils.arraycopy(CRCBytes, 0, result, position, PackageInfo.CRC_LENGTH);
+        byte [] CRCBytes = TcpSocketUtils.toByteArray(TcpSocketUtils.crc(dataBytes,0), PackageInfo.CRC_LENGTH);
+        position = TcpSocketUtils.arraycopy(CRCBytes, 0, result, position, PackageInfo.CRC_LENGTH);
         //DATA
-        position = DecodeUtils.arraycopy(dataBytes, 0, result, position, dataBytes.length);
+        position = TcpSocketUtils.arraycopy(dataBytes, 0, result, position, dataBytes.length);
         //包尾
         byte [] tailBytes = TcpSocketUtils.toByteArray(0XFD3A, PackageInfo.PACKAGE_HEAD_LENGTH);
-        position = DecodeUtils.arraycopy(tailBytes, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
+        position = TcpSocketUtils.arraycopy(tailBytes, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
         return result;
 
     }
@@ -198,20 +198,20 @@ public class EncodeData {
         int position = 0;
         //包头
         byte [] headBytes = TcpSocketUtils.toByteArray(0X1ACF, PackageInfo.PACKAGE_HEAD_LENGTH);
-        position = DecodeUtils.arraycopy(headBytes, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
+        position = TcpSocketUtils.arraycopy(headBytes, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
         //版本号
-        position = DecodeUtils.arraycopy(downStream.getVersionBytes(), 0, result, position, PackageInfo.PACKAGE_VERSION_LENGTH);
+        position = TcpSocketUtils.arraycopy(downStream.getVersionBytes(), 0, result, position, PackageInfo.PACKAGE_VERSION_LENGTH);
         //数据区长度
-        position = DecodeUtils.arraycopy(TcpSocketUtils.toByteArray(detailUpdatePackageBytes.length, 2),
+        position = TcpSocketUtils.arraycopy(TcpSocketUtils.toByteArray(detailUpdatePackageBytes.length, 2),
                 0,  result, position, PackageInfo.DATA_LENGTH);
         //CRC
-        byte [] CRCBytes = TcpSocketUtils.toByteArray(DecodeUtils.crc(detailUpdatePackageBytes, 0), PackageInfo.CRC_LENGTH);
-        position = DecodeUtils.arraycopy(CRCBytes, 0 , result, position, PackageInfo.CRC_LENGTH);
+        byte [] CRCBytes = TcpSocketUtils.toByteArray(TcpSocketUtils.crc(detailUpdatePackageBytes, 0), PackageInfo.CRC_LENGTH);
+        position = TcpSocketUtils.arraycopy(CRCBytes, 0 , result, position, PackageInfo.CRC_LENGTH);
         //包编号 U8
         byte [] packageNumBytes = TcpSocketUtils.toByteArray(downStream.getDataPosition() / 1024, 1);
-        position = DecodeUtils.arraycopy(packageNumBytes,0 , result, position, 1);
+        position = TcpSocketUtils.arraycopy(packageNumBytes,0 , result, position, 1);
         //data
-        DecodeUtils.arraycopy(detailUpdatePackageBytes, 0 , result, position, detailUpdatePackageBytes.length);
+        TcpSocketUtils.arraycopy(detailUpdatePackageBytes, 0 , result, position, detailUpdatePackageBytes.length);
         return result;
     }
 
@@ -227,20 +227,20 @@ public class EncodeData {
 //        int position = 0;
 //        //包头
 //        byte[] packageHead = TcpSocketUtils.toByteArray(0x1acf, PackageInfo.PACKAGE_HEAD_LENGTH);
-//        position = DecodeUtils.arraycopy(packageHead, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
+//        position = TcpSocketUtils.arraycopy(packageHead, 0, result, position, PackageInfo.PACKAGE_HEAD_LENGTH);
 //        //网关号
-//        position = DecodeUtils.arraycopy(TcpSocketUtils.toByteArray(downStream.getSerrialID(), PackageInfo.SN_LENGTH),
+//        position = TcpSocketUtils.arraycopy(TcpSocketUtils.toByteArray(downStream.getSerrialID(), PackageInfo.SN_LENGTH),
 //                0, result, position, PackageInfo.SN_LENGTH);
 //        //数据长度
-//        position = DecodeUtils.arraycopy(TcpSocketUtils.toByteArray(subPackageContent.length, PackageInfo.DATA_LENGTH),
+//        position = TcpSocketUtils.arraycopy(TcpSocketUtils.toByteArray(subPackageContent.length, PackageInfo.DATA_LENGTH),
 //                0, result, position, PackageInfo.DATA_LENGTH);
 //        //CRC
-//        position = DecodeUtils.arraycopy(TcpSocketUtils.toByteArray(DecodeUtils.crc(subPackageContent, 0), PackageInfo.CRC_LENGTH),
+//        position = TcpSocketUtils.arraycopy(TcpSocketUtils.toByteArray(TcpSocketUtils.crc(subPackageContent, 0), PackageInfo.CRC_LENGTH),
 //                0, result, position, PackageInfo.CRC_LENGTH);
 //        //type
-//        position = DecodeUtils.arraycopy(TcpSocketUtils.toByteArray(downStream.getDownStreamType().getValue(), PackageInfo.TYPE_LENGTH),
+//        position = TcpSocketUtils.arraycopy(TcpSocketUtils.toByteArray(downStream.getDownStreamType().getValue(), PackageInfo.TYPE_LENGTH),
 //                0, result, position , PackageInfo.TYPE_LENGTH);
-//        DecodeUtils.arraycopy(subPackageContent, 0, result, position, subPackageContent.length);
+//        TcpSocketUtils.arraycopy(subPackageContent, 0, result, position, subPackageContent.length);
 //
 //        return result;
 //    }

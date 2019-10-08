@@ -8,30 +8,30 @@ final class PackageInfo {
     /**
      * 包头长度
      */
-     static final int PACKAGE_HEAD_LENGTH = 2;
+    static final int PACKAGE_HEAD_LENGTH = 2;
     /**
      * 网关/主板id长度
      */
-     static final int SN_LENGTH = 4;
+    static final int SN_LENGTH = 4;
 
     /**
      * 表示实际数据长度
      */
-     static final int DATA_LENGTH = 2;
+    static final int DATA_LENGTH = 2;
     /**
      * 校验crc
      */
-     static final int CRC_LENGTH = 2;
+    static final int CRC_LENGTH = 2;
     /**
      * 数据类型长度
      */
-     static final int TYPE_LENGTH = 1;
+    static final int TYPE_LENGTH = 1;
 
-     static final int SET_MAIN_BOARD_STATE_LENGTH = 1;
+    static final int SET_MAIN_BOARD_STATE_LENGTH = 1;
     /**
      * 数据包的基础长度
      */
-     static final int BASIC_PACKAGE_LENGTH = 11;
+    static final int BASIC_PACKAGE_LENGTH = 11;
     /**
      * 升级包在系统中的路径
      */
