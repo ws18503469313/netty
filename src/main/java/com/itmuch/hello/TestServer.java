@@ -7,6 +7,10 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 /**
  *
  * @author polunzi
@@ -37,6 +41,25 @@ public class TestServer {
 
     }
 
+    public static void count() throws Exception {
+        String filename = "D:/File/calcCharNum.txt";
+        BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+        char [] line = new char[1024];
+        int A = 0;
+        int a = 0;
+        while(reader.read(line) != -1){
+            for(int i = 0; i < 1024; i++){
+                if(line[i] == 'a'){
+                    a++;
+                }
+                if(line[i] == 'A'){
+                    A++;
+                }
+            }
+        }
+        System.out.println("a: " + a);
+        System.out.println("A: " + A);
+    }
 
 }
 

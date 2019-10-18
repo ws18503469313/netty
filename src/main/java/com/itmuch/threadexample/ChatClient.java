@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 public class ChatClient  {
 
 
-    public static void main(String args[])  throws Exception {
+    public static void main1(String args[])  throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
@@ -30,6 +30,10 @@ public class ChatClient  {
         }finally {
             group.shutdownGracefully();
         }
+    }
+
+    public static void main(String[] args) {
+        String[] a = "a|b|c".split("a|b|c");
     }
 
 }
